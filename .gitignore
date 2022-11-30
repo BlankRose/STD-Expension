@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+
+# Various useless files
+.DS_Store
+.vs_code
+.header

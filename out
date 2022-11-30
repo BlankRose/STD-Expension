@@ -1,0 +1,138 @@
+/* ********************************************************************* */
+/*          .-.                                                          */
+/*    __   /   \   __                                                    */
+/*   (  `'.\   /.'`  )   STL Expension - vector2d.hpp                    */
+/*    '-._.(;;;)._.-'                                                    */
+/*    .-'  ,`"`,  '-.                                                    */
+/*   (__.-'/   \'-.__)   BY: Rosie (https://github.com/BlankRose)        */
+/*       //\   /         Last Updated: Sun Nov  6 18:54:05 CET 2022      */
+/*      ||  '-'                                                          */
+/* ********************************************************************* */
+
+#ifndef __STLEX_VECTOR2D_H__
+# define __STLEX_VECTOR2D_H__
+
+#include <cmath>
+#include <iostream>
+#include <algorithm>
+
+#include "params.hpp"
+
+__STLEX_NAMESPACE_BEGIN__
+
+template <typename X = int, typename Y = X, typename Distance = float>
+class Vector2D {
+
+	public:
+		////// TYPE DEFINITIONS //////
+
+		typedef X			x_type;
+		typedef Y			y_type;
+		typedef Distance	distance_type;
+
+		////// OBJECT VARIABLES //////
+
+		x_type		_x;
+		y_type		_y;
+
+		//////// CONSTRUCTORS ////////
+
+		Vector2D(x_type x = x_type(), y_type y = y_type()):
+			_x(x), _y(y) {}
+
+		Vector2D(const Vector2D &src):
+			_x(src._x), _y(src._y) {}
+
+		template <typename T, typename U>
+		Vector2D(T x = T(), U y = U()):
+			_x(x_type(x)), _y(y_type(y)) {}
+
+		template <typename T, typename U>
+		Vector2D(const Vector2D<T, U> &src):
+			_x(x_type(src._x)), _y(y_type(src._y)) {}
+
+		~Vector2D() {}
+
+		/////// OBJECT METHODS ///////
+
+		distance_type	getDistance(void) const
+			{ return (sqrt(pow((distance_type) _x, 2) + pow((distance_type) _y, 2))); }
+
+		distance_type	getDistance(const Vector2D &cmp)
+			{ return (std::max(*this, cmp) - std::min(*this, cmp)).getDistance() ; }
+
+		//// INCREMENTAL OVERLOADS ///
+
+		Vector2D		&operator=(const Vector2D &ext)
+			{ _x = ext._x; _y = ext._y; return *this; }
+
+		Vector2D		operator+(const Vector2D &ext) const
+			{ return Vector2D(this->_x + ext._x, this->_y + ext._y); }
+		Vector2D		operator-(const Vector2D &ext) const
+			{ return Vector2D(this->_x - ext._x, this->_x - ext._y); }
+		Vector2D		operator*(const Vector2D &ext) const
+			{ return Vector2D(this->_x * ext._x, this->_y * ext._y); }
+		Vector2D		operator/(const Vector2D &ext) const
+			{ return Vector2D(this->_x / ext._x, this->_y / ext._y); }
+		Vector2D		operator%(const Vector2D &ext) const
+			{ return Vector2D(this->_x % ext._x, this->_y % ext._y); }
+
+		Vector2D		&operator+=(const Vector2D &ext)
+			{ _x += ext._x; _y += ext._y; return *this; }
+		Vector2D		&operator-=(const Vector2D &ext)
+			{ _x -= ext._x; _y -= ext._y; return *this; }
+		Vector2D		&operator*=(const Vector2D &ext)
+			{ _x *= ext._x; _y *= ext._y; return *this; }
+		Vector2D		&operator/=(const Vector2D &ext)
+			{ _x /= ext._x; _y /= ext._y; return *this; }
+		Vector2D		&operator%=(const Vector2D &ext)
+			{ _x %= ext._x; _y %= ext._y; return *this; }
+
+		template <typename T>
+		Vector2D		operator*(const T &multiplier) const
+			{ return Vector2D(this->_x * multiplier, this->_y * multiplier); }
+		template <typename T>
+		Vector2D		operator/(const T &multiplier) const
+			{ return Vector2D(this->_x / multiplier, this->_y / multiplier); }
+
+		template <typename T>
+		Vector2D		&operator*=(const T &multiplier)
+			{ _x *= multiplier; _y *= multiplier; return *this; }
+		template <typename T>
+		Vector2D		&operator/=(const T &multiplier)
+			{ _x /= multiplier; _y /= multiplier; return *this; }
+
+		//////// COMPARAISONS ////////
+
+		bool			operator==(const Vector2D &ext) const
+			{ return (_x == ext._x && _y == ext.y); }
+		bool			operator!=(const Vector2D &ext) const
+			{ return !(*this == ext); }
+		bool			operator>(const Vector2D &ext) const
+			{ return (this->getDistance() > ext.getDistance()); }
+		bool			operator<(const Vector2D &ext) const
+			{ return (ext > *this); }
+		bool			operator<=(const Vector2D &ext) const
+			{ return !(*this > ext); }
+		bool			operator>=(const Vector2D &ext) const
+			{ return !(ext > *this); }
+
+		/////////// OUTPUT ///////////
+
+		// std::ostream	&operator<<(std::ostream &out) const
+		// {
+		// 	out << _x << ";" << _y;
+		// 	return (out);
+		// }
+};
+
+template <typename X, typename Y>
+std::ostream		&operator<<(std::ostream &out, const Vector2D<X, Y> &v)
+{
+	out << v._x << ";" << v._y;
+	return (out);
+}
+
+__STLEX_NAMESPACE_END__
+
+#endif /* __STLEX_VECTOR2D_H__ */
