@@ -27,11 +27,12 @@
 *.lib
 
 # Executables
+package/
 *.exe
 *.out
 *.app
 
 # Various useless files
 .DS_Store
-.vs_code
+.vscode
 .header

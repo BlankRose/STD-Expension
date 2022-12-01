@@ -5,7 +5,7 @@
 #    '-._.(;;;)._.-'                                                    #
 #    .-'  ,`"`,  '-.                                                    #
 #   (__.-'/   \'-.__)   BY: Rosie (https://github.com/BlankRose)        #
-#       //\   /         Last Updated: Wed Nov 30 22:12:13 CET 2022      #
+#       //\   /         Last Updated: Thu Dec  1 13:47:42 CET 2022      #
 #      ||  '-'                                                          #
 # ********************************************************************* #
 
@@ -102,7 +102,7 @@ CLASSES			= $(addprefix $(CLASSES_FOLDER)$(FOLD), $(CLASSES_FILES))
 # GENERIC_FOLDER is the subfolder where is located all of the files
 # BIN_FOLDER will define where the objects files will be created
 
-GENERIC_FILES	= $(CLASSES) main
+GENERIC_FILES	= $(CLASSES) Colors
 GENERIC_FOLDER	= src
 BIN_FOLDER		= bin
 
